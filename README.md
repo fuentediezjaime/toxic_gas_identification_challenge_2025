@@ -1,0 +1,4 @@
+# Toxic gas detection challenge by ENS-Paris & Bertin technologies
+This challenge, organized by the ENS-Paris Data team in collaboration with Bertin Technologies during the 2025 season, focuses on detecting toxic gases using sensor data, simulating a handheld detector's operation. The goal is to build a machine learning model that, using 14 sensor measurements (including humidity), can identify the presence of 23 types of gases or their associated characteristics. The evaluation metric prioritizes correct gas detection over false alarms, and the challenge values lightweight model solutions that resemble a real-life implementation.
+
+This repo contains my attempt at a solution for this challenge.
