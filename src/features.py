@@ -5,6 +5,8 @@ or other dimensionality reductions.
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
+from model import LgbmMultiout
+
 def load_and_separate_data(path_x : str, path_y : str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     '''
     Reads the dfs containing the training set, removes the ID column for each df and 
@@ -25,9 +27,6 @@ def load_and_separate_data(path_x : str, path_y : str) -> tuple[pd.DataFrame, pd
     return x_train, x_test, y_train, y_test
 
 
-
-
-
 def custom_cost(y_pred: np.array, y_true_pd: pd.DataFrame) -> float:
     y_true = y_true_pd.to_numpy() # Convert the true y values to numpy array.
 
@@ -35,3 +34,12 @@ def custom_cost(y_pred: np.array, y_true_pd: pd.DataFrame) -> float:
     squared_errors = (y_true - y_pred)**2
     weighted_errors = scale_factors * squared_errors
     return np.mean(weighted_errors)
+
+
+def objective(trial, X_set, Y_set):
+    '''
+    This is the key function for Optuna. It instantiates the model object, fits it and uses it to generate a prediction, which will be scored by
+    the custom_cost function in features.py. Cross validation is used to define a score. 
+    '''
+
+    model = LgbmMultiout()

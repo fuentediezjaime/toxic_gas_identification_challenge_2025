@@ -8,9 +8,10 @@ import pandas as pd
 from sklearn.multioutput import MultiOutputRegressor
 import joblib
 import os
+from features import custom_cost
 
 class LgbmMultiout:
-    def __init__(self, model_params, npar: int=1):
+    def __init__(self, model_params, npar: int=1, processor:str):
         self.model = MultiOutputRegressor(lgb.LGBMRegressor(**model_params),n_jobs=npar) #Initialize the model
         self._is_trained = False #Initialize the model as untrained
 
@@ -39,5 +40,5 @@ class LgbmMultiout:
             joblib.dump(self, path_save)
         else:
             raise RuntimeError('Model was not trained before saving')
+        
 
-def 
